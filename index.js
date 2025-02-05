@@ -1,18 +1,23 @@
 function generateSquareGrid(size) {
 	const container = document.querySelector("#container");
 	for (i = 0; i < size; i++) {
-		const row = document.createElement("div");
-		row.classList.add("row");
+		const column = document.createElement("div");
+		column.classList.add("column");
 		for (j = 0; j < size; j++) {
 			const square = document.createElement("div");
 			square.classList.add("square");
 			square.addEventListener("mouseover", function () {
-				this.style.backgroundColor = "yellow";
+				this.style.backgroundColor = randomHexColor();
 			});
-			row.appendChild(square);
+			column.appendChild(square);
 		}
-		container.appendChild(row);
+		container.appendChild(column);
 	}
+}
+
+function randomHexColor() {
+	const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+	return "#" + randomColor;
 }
 
 function getSizeFromUser() {
@@ -29,7 +34,7 @@ function clearGrid() {
 	container.innerHTML = "";
 }
 
-function buttonClick() {
+function resizeGridButtonCick() {
 	const button = document.querySelector("#button");
 	button.addEventListener("click", function () {
 		size = getSizeFromUser();
@@ -39,9 +44,9 @@ function buttonClick() {
 }
 
 function main() {
-	size = 4;
-	generateSquareGrid(size);
-	buttonClick();
+	default_size = 4;
+	generateSquareGrid(default_size);
+	resizeGridButtonCick();
 }
 
 main();
